@@ -1,5 +1,6 @@
 import concurrent.futures
 import os
+from zipfile import ZipFile
 
 import Storage
 import conf_generator
@@ -22,6 +23,7 @@ Storage.logger.info('Getting CraftBukkit links')
 all_links['craftbukkit'].update(CraftBukkitProvider.get())
 all_links['spigot'].update(SpigotProvider.get())
 all_links['vanila'].update(VanillaProvider.get())
+all_paths = []
 
 Storage.logger.debug(all_links)
 with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -52,6 +54,8 @@ for stage in os.listdir('jar'):
         for jar_name in os.listdir(f'jar/{stage}/{jar_type}'):
             if jar_name.startswith('.') or os.path.isdir(f'jar/{stage}/{jar_type}/{jar_name}'):
                 continue
+            all_paths.append(f'jar/{stage}/{jar_type}/{jar_name}')
+            all_paths.append(f'conf/{stage}/{jar_type}/{jar_name}.conf')
             Storage.logger.info(f'Generating configs for {jar_name}')
             jar_version = jar_name.split('-')[1].replace('.jar', '')
             import_command += import_generator.generate(jar_type, jar_version, stage)
@@ -61,3 +65,11 @@ if os.path.exists('import.sql'):
 with open(f'import.sql', 'a') as output_file:
     output_file.write(import_command)
     Storage.logger.info('Saved import.sql file')
+
+print(all_paths)
+
+if os.path.exists('zip/dist.zip'):
+    os.remove('zip/dist.zip')
+with ZipFile('zip/dist.zip', 'w') as zip:
+    for file in all_paths:
+        zip.write(file, os.path.basename(file))

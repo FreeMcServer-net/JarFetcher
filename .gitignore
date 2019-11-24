@@ -4,6 +4,7 @@
 import\.sql
 
 *.jar
+*.zip
 *.jar.conf
 *.pyc
 

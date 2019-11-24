@@ -1,0 +1,18 @@
+[parse_startup]
+start=\s*Done
+important=true
+
+## See the default craftbukkit.jar.conf for a detailed documentation of the
+## format of this file.
+[config]
+name = Custom JAR
+configSource = https://jar.freemcserver.net/conf/stable/custom/custom.jar.conf
+category = Mods
+
+[encoding]
+#encode = system
+#decode = system
+#fileEncoding = latin-1
+
+[start]
+command = /bin/nice -n 10 "{JAVA}" -Xmx{MAX_MEMORY}M -Xms{START_MEMORY}M -XX:MaxPermSize=128M -Djline.terminal=jline.UnsupportedTerminal -Dcom.mojang.eula.agree=true -jar "{JAR}" nogui

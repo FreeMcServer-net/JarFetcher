@@ -1,6 +1,8 @@
 def generate(type: str, version: str, stage: str):
     import Storage
     import os
+    if type is 'custom':
+        return
     if not os.path.exists(f'conf-template/{stage}/{type}/{type}.template'):
         Storage.logger.error(f'conf-template/{stage}/{type}/{type}.template dosent exist, config will not be generate')
         return
