@@ -8,7 +8,7 @@ jar_types = {
     },
     'snapshot': {
         'craftbukkit': 6,
-        'nukkit': None,
+        'nukkit': 13,
         'paper': None,
         'spigot': 7,
         'vanila': 10,
@@ -18,7 +18,7 @@ jar_types = {
 
 def generate(type: str, version: str, stage: str):
     stage_label = ''
-    if stage is 'snapshot':
+    if stage == 'snapshot':
         stage_label = '-snapshot'
     command = f"INSERT IGNORE INTO `jars` (`id`, `id_type`, `internal_name`, `version`,  `active`, `default`) VALUES (NULL, {jar_types[stage][type]}, '{type}-{version}{stage_label}.jar', '{version}',  '0', '0');\n"
     return command

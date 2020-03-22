@@ -3,6 +3,7 @@ from logging import Logger
 
 logger: Logger
 
+new_installs = []
 
 def init_logger():
     global logger

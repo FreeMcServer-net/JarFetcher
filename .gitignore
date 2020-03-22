@@ -2,6 +2,7 @@
 \.idea/
 
 import\.sql
+install\.txt
 
 *.jar
 *.zip

@@ -6,7 +6,7 @@ important=true
 ## format of this file.
 [config]
 name = Custom JAR
-configSource = https://jar.freemcserver.net/conf/stable/custom/custom.jar.conf
+configSource = http://jar.freemcserver.net/conf/stable/custom/custom.jar.conf
 category = Mods
 
 [encoding]
